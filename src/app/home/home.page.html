@@ -1,62 +1,163 @@
+<app-menu>
+  
+</app-menu>
 
-<app-menu></app-menu>
-
-<!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Jogos</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/integrantes">Integrantes</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+<!-- <ion-menu type="reveal" content-id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu Content</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-item routerLink="/">Início</ion-item>
+    <ion-item routerLink="/integrantes">Integrantes</ion-item>
+    <ion-item>Página 2</ion-item>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Jogos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <h2>Melhor avaliação</h2>
+    <div class="scrolling-wrapper-flexbox" >
+      <ion-card class="card" *ngFor="let result of bemAvaliados.results" (click)="goToDetails(result.id)">
+        <img class="card-img" alt=""
+          src={{result.background_image}} />
+        <ion-card-header>
+          <ion-card-title>{{result.name}}</ion-card-title>
+          <ion-card-subtitle>Lançamento {{result.released}}</ion-card-subtitle>
+          <ion-card-subtitle>Nota {{result.rating}}</ion-card-subtitle>
+        </ion-card-header>        
+      </ion-card>
     </div>
-  </div>
-</nav>
 
-<div class="container mt-4">
-  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <ion-list *ngFor="let item of carouselInnerHtml?.results">
-        <ion-item>
-          <h3>{{ item?.name }}</h3>
-        </ion-item>
-        <ion-item>
-          <img src="{{item.short_screenshots[0].image}}" alt="">
-        </ion-item>
-      </ion-list>
+
+    <div class="conteudo-teste">
+      <h2>Lançamentos</h2>
+      <div class="scrolling-wrapper-flexbox">
+        <ion-card class="card">
+          <img class="card-img" alt="Silhouette of mountains"
+            src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <ion-card-header>
+            <ion-card-title>Card Title</ion-card-title>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            Here's a small text description for the card content. Nothing more, nothing less.
+          </ion-card-content>
+        </ion-card>
+        <ion-card class="card">
+          <img class="card-img" alt="Silhouette of mountains"
+            src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <ion-card-header>
+            <ion-card-title>Card Title</ion-card-title>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            Here's a small text description for the card content. Nothing more, nothing less.
+          </ion-card-content>
+        </ion-card>
+        <ion-card class="card">
+          <img class="card-img" alt="Silhouette of mountains"
+            src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <ion-card-header>
+            <ion-card-title>Card Title</ion-card-title>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            Here's a small text description for the card content. Nothing more, nothing less.
+          </ion-card-content>
+        </ion-card>
+
+      </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+
+    <div class="conteudo-teste">
+      <h2>Melhor avaliação</h2>
+      <div class="scrolling-wrapper-flexbox">
+        <ion-card class="card">
+          <img class="card-img" alt="Silhouette of mountains"
+            src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <ion-card-header>
+            <ion-card-title>Card Title</ion-card-title>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            Here's a small text description for the card content. Nothing more, nothing less.
+          </ion-card-content>
+        </ion-card>
+        <ion-card class="card">
+          <img class="card-img" alt="Silhouette of mountains"
+            src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <ion-card-header>
+            <ion-card-title>Card Title</ion-card-title>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            Here's a small text description for the card content. Nothing more, nothing less.
+          </ion-card-content>
+        </ion-card>
+        <ion-card class="card">
+          <img class="card-img" alt="Silhouette of mountains"
+            src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <ion-card-header>
+            <ion-card-title>Card Title</ion-card-title>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            Here's a small text description for the card content. Nothing more, nothing less.
+          </ion-card-content>
+        </ion-card>
+
+      </div>
+    </div>
+
+    <div class="conteudo-teste">
+      <h2>Últimos jogos lançados</h2>
+      <div class="scrolling-wrapper-flexbox">
+        <ion-card class="card">
+          <img class="card-img" alt="Silhouette of mountains"
+            src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <ion-card-header>
+            <ion-card-title>Card Title</ion-card-title>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            Here's a small text description for the card content. Nothing more, nothing less.
+          </ion-card-content>
+        </ion-card>
+        <ion-card class="card">
+          <img class="card-img" alt="Silhouette of mountains"
+            src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <ion-card-header>
+            <ion-card-title>Card Title</ion-card-title>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            Here's a small text description for the card content. Nothing more, nothing less.
+          </ion-card-content>
+        </ion-card>
+        <ion-card class="card">
+          <img class="card-img" alt="Silhouette of mountains"
+            src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          <ion-card-header>
+            <ion-card-title>Card Title</ion-card-title>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            Here's a small text description for the card content. Nothing more, nothing less.
+          </ion-card-content>
+        </ion-card>
+
+      </div>
+    </div>
+  </ion-content>
 </div> -->
+
+<!-- <app-menu></app-menu> -->

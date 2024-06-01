@@ -35,3 +35,24 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+.scrolling-wrapper-flexbox {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+
+    .card {
+        flex: 0 0 auto !important;
+        max-width: 250px !important;
+    }
+}
+
+// .scrolling-wrapper {
+//     &::-webkit-scrollbar {
+//       display: none;
+//     }
+//   }
+
+.scrolling-wrapper-flexbox {
+    -webkit-overflow-scrolling: touch !important;
+}

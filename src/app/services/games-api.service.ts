@@ -6,10 +6,11 @@ import { map } from 'rxjs/operators';
 export interface apiResult2 {
     count: number;
     results: any[];
-    previous?: string,
+    previous?: string ,
     next?: string,
     seo_title: string;
 }
+
 @Injectable({
     providedIn: 'root'
 })
@@ -19,10 +20,26 @@ export class GamesApiService {
     getSearchMovies(): Observable<apiResult2> {
         return this.http.get<apiResult2>(            
             // `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`
-            `https://api.rawg.io/api/games?key=6a167e0c74be43c6872cdbd3091db111&page_size=1&page=1`
+            //`https://api.rawg.io/api/games?key=6a167e0c74be43c6872cdbd3091db111&page_size=1&page=1`
+            `null`
         );
     }
 
+    getJogos(pagina: number, ordenacao: string): Observable<apiResult2> {
+        return this.http.get<apiResult2>(            
+            //released
+            //rating
+            // `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`
+            `https://api.rawg.io/api/games?key=6a167e0c74be43c6872cdbd3091db111&page_size=5&page=${pagina}&ordering=${ordenacao}`
+        );                      
+    }
+
+    getBemAvaliados(pagina: number): Observable<apiResult2> {
+        return this.http.get<apiResult2>(            
+            // `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`
+            `https://api.rawg.io/api/games?key=6a167e0c74be43c6872cdbd3091db111&page_size=5&page=${pagina}&ordering=released`
+        );
+    }
 
     // getPagesData(): Observable<any> {
     //     const page1$ = this.getDiscoverMovies(1);

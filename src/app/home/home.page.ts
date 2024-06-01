@@ -10,15 +10,46 @@ import { Router } from '@angular/router';
 export class HomePage implements OnInit {
 
   carouselInnerHtml : any;
+  lancamentos : any;
+  bemAvaliados : any;
   constructor(public gamesApiService: GamesApiService, private router: Router) { }  
 
   ngOnInit() {
-    this.gamesApiService.getSearchMovies().subscribe(
-      (result: any) => {
-        this.carouselInnerHtml = result
-        console.log('nome do jogo');
-        console.log(this.carouselInnerHtml.results);
+    
+    // this.gamesApiService.getSearchMovies().subscribe(
+    //   (result: any) => {
+    //     console.log('result')
+    //     console.log(result)
+    //     this.lancamentos = result
         
-      })
+    //   })
+
+    // this.gamesApiService.getJogos(1, "released").subscribe(
+    //   (result: any) => {
+    //     console.log('result')
+    //     console.log(result)
+    //     this.lancamentos = result
+        
+    //   })
+
+    this.gamesApiService.getJogos(1, "-rating, released").subscribe(
+      (result: any) => {
+        this.bemAvaliados = result
+        
+      })      
+  }
+
+
+  // goToDetails(id: number) {
+  //   this.navCtrl.navigateForward(`/detalhes/${id}`);
+  // }
+
+  goToDetails(id: number) {
+    this.router.navigate(['/detalhes', id], {
+      queryParams: {
+        param1: 'value1',
+        param2: 'value2'
+      }
+    });
   }
 }
