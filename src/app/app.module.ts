@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy, RouterLink } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
+import { MenuComponent } from './menu/menu.component';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
