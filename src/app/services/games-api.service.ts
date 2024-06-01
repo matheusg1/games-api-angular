@@ -3,12 +3,22 @@ import { Injectable } from '@angular/core';
 import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-export interface apiResult2 {
+export interface listaJogosResult {
     count: number;
     results: any[];
     previous?: string ,
     next?: string,
     seo_title: string;
+}
+
+export interface jogoResult {
+    id: number;
+    slug: any[];
+    description: string ,
+    released: string,
+    background_image: string;
+    background_image_additional: string;
+    rating: string;
 }
 
 @Injectable({
@@ -17,16 +27,16 @@ export interface apiResult2 {
 export class GamesApiService {
     constructor(private http: HttpClient) { }
 
-    getSearchMovies(): Observable<apiResult2> {
-        return this.http.get<apiResult2>(            
+    getSearchMovies(): Observable<listaJogosResult> {
+        return this.http.get<listaJogosResult>(            
             // `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`
             //`https://api.rawg.io/api/games?key=6a167e0c74be43c6872cdbd3091db111&page_size=1&page=1`
             `null`
         );
     }
 
-    getJogos(pagina: number, ordenacao: string): Observable<apiResult2> {
-        return this.http.get<apiResult2>(            
+    getJogos(pagina: number, ordenacao: string): Observable<listaJogosResult> {
+        return this.http.get<listaJogosResult>(            
             //released
             //rating
             // `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`
@@ -34,8 +44,14 @@ export class GamesApiService {
         );                      
     }
 
-    getBemAvaliados(pagina: number): Observable<apiResult2> {
-        return this.http.get<apiResult2>(            
+    getJogo(id?: number): Observable<jogoResult> {
+        return this.http.get<jogoResult>(            
+            `https://api.rawg.io/api/games/${id}?key=6a167e0c74be43c6872cdbd3091db111`
+        );                      
+    }
+
+    getBemAvaliados(pagina: number): Observable<listaJogosResult> {
+        return this.http.get<listaJogosResult>(            
             // `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`
             `https://api.rawg.io/api/games?key=6a167e0c74be43c6872cdbd3091db111&page_size=5&page=${pagina}&ordering=released`
         );

@@ -1,9 +1,16 @@
-<!-- <ion-content class="ion-padding">
-  <p>Detalhes do item com ID: {{ id }}</p>
-</ion-content> -->
+  <app-menu>
 
+  <ion-card>
+    <img class="card-img"
+      src={{jogo.background_image}} />
+    <ion-card-header>
+      <ion-card-title>{{jogo.name}}</ion-card-title>
+      <ion-card-subtitle>Lançamento {{jogo.released}}</ion-card-subtitle>
+      <ion-card-subtitle>Nota {{jogo.rating}}</ion-card-subtitle>
+    </ion-card-header>        
+    <ion-card-content>
+      {{jogo.description}}
+    </ion-card-content>
+  </ion-card>
 
-  
-<app-menu>
-  
 </app-menu>
