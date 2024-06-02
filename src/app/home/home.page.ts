@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GamesApiService } from '../services/games-api.service';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',

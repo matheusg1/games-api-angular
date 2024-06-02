@@ -10,8 +10,7 @@ import { MenuModule } from '../menu/menu.module';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    MenuModule
+    IonicModule
   ],
   declarations: [DetailsComponent],  
 })

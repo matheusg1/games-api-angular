@@ -4,6 +4,7 @@ import { MenuComponent } from './menu.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterModule } from '@angular/router';
 
 
 
@@ -12,9 +13,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     IonicModule,
-    //HomePageRoutingModule
-    AppRoutingModule,      
-       
+    RouterLink,   
   ],
   exports:[MenuComponent],
   declarations: [

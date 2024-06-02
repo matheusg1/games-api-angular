@@ -6,21 +6,20 @@ import { HomePage } from './home.page';
 //import { MenuComponent } from '../menu/menu.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { MenuComponent } from '../menu/menu.component';
-import { DetailsModule } from '../details/details.module';
-import { DetailsComponent } from '../details/details.component';
+// import { DetailsModule } from '../details/details.module';
+// import { DetailsComponent } from '../details/details.component';
 import { MenuModule } from '../menu/menu.module';
+import { RouterLink } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    //HomePageRoutingModule
-    AppRoutingModule,      
-    MenuModule  
+    MenuModule
   ],
   declarations: [
     HomePage    
   ]
 })
-export class HomePageModule { }
+export class HomeModule { }

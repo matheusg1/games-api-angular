@@ -8,7 +8,7 @@ import { GamesApiService } from '../services/games-api.service';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit {
-  id?: number | undefined;
+  id?: number;
   queryParams: any;
   jogo: any
 

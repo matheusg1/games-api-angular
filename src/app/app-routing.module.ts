@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home/home.page';
-import { HomePageModule } from './home/home.module';
 import { IntegrantesComponent } from './integrantes/integrantes.component';
-import { DetailsComponent } from './details/details.component';
+import { HomeModule } from './home/home.module';
+import { MenuModule } from './menu/menu.module';
+import { IntegrantesModule } from './integrantes/integrantes.module';
 import { DetailsModule } from './details/details.module';
+import { DetailsComponent } from './details/details.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,10 @@ const routes: Routes = [
     component: IntegrantesComponent
   },
   {
+    path: 'teste21334',
+    component: IntegrantesComponent
+  },
+  {
     path: 'detalhes/:id',
     component: DetailsComponent
   }
@@ -28,8 +34,12 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),    
-  ],
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    MenuModule,
+    HomeModule,    
+    IntegrantesModule,    
+    DetailsModule
+  ],  
   exports: [RouterModule],
 })
 export class AppRoutingModule { }
