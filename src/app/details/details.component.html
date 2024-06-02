@@ -1,12 +1,19 @@
 <ion-card>
-    <img class="card-img"
-      src={{jogo.background_image}} />
-    <ion-card-header>
-      <ion-card-title>{{jogo.name}}</ion-card-title>
-      <ion-card-subtitle>Lançamento {{jogo.released}}</ion-card-subtitle>
-      <ion-card-subtitle>Nota {{jogo.rating}}</ion-card-subtitle>
-    </ion-card-header>        
-    <ion-card-content>
-      {{jogo.description}}
-    </ion-card-content>
+  <ion-card class="card">
+    <img class="card-img" src={{jogo?.background_image}} />
   </ion-card>
+  <ion-card-header>
+    <ion-card-title>{{jogo?.name}}</ion-card-title>
+    <ion-card-subtitle>Lançamento {{jogo?.released}}</ion-card-subtitle>
+    <ion-card-subtitle>Nota {{jogo?.rating}}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    {{jogo?.description}}
+    <h2>Screenshots</h2>
+    <div class="scrolling-wrapper-flexbox">
+      <ion-card class="card" *ngFor="let result of screenshots?.results">
+        <img class="card-img" src={{result?.image}} />
+      </ion-card>
+    </div>
+  </ion-card-content>
+</ion-card>

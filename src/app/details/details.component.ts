@@ -10,7 +10,8 @@ import { GamesApiService } from '../services/games-api.service';
 export class DetailsComponent implements OnInit {
   id?: number;
   queryParams: any;
-  jogo: any
+  jogo: any;
+  screenshots: any;
 
   constructor(public gamesApiService: GamesApiService, private route: ActivatedRoute) { }
 
@@ -30,6 +31,13 @@ export class DetailsComponent implements OnInit {
           console.log('result')
           console.log(result)
         })
+
+        this.gamesApiService.getScreenshots(this.id).subscribe(
+          (result: any) => {
+            this.screenshots = result            
+            console.log('screenshots')
+            console.log(this.screenshots)
+          })
     }
   }
 }

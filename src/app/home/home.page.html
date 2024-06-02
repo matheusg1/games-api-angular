@@ -1,7 +1,7 @@
 
   <ion-content class="ion-padding">
     <h2>Melhor avaliação</h2>
-    <div class="scrolling-wrapper-flexbox" >
+    <div class="scrolling-wrapper-flexbox">
       <ion-card class="card" *ngFor="let result of bemAvaliados?.results" (click)="goToDetails(result?.id)">
         <img class="card-img" alt=""
           src={{result?.background_image}} />
