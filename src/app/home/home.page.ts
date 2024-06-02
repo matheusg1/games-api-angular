@@ -10,34 +10,29 @@ import { MenuController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
 
-  carouselInnerHtml : any;
-  lancamentos : any;
-  bemAvaliados : any;
-  constructor(public gamesApiService: GamesApiService, private router: Router) { }  
+  carouselInnerHtml: any;
+  lancamentos: any;
+  bemAvaliados: any;
+  jogosRpg: any;
+  jogosIndie: any;
+  constructor(public gamesApiService: GamesApiService, private router: Router) { }
 
   ngOnInit() {
-    
-    // this.gamesApiService.getSearchMovies().subscribe(
-    //   (result: any) => {
-    //     console.log('result')
-    //     console.log(result)
-    //     this.lancamentos = result
-        
-    //   })
-
-    // this.gamesApiService.getJogos(1, "released").subscribe(
-    //   (result: any) => {
-    //     console.log('result')
-    //     console.log(result)
-    //     this.lancamentos = result
-        
-    //   })
-
     this.gamesApiService.getJogos(1, "-rating, released").subscribe(
       (result: any) => {
         this.bemAvaliados = result
-        
-      })      
+
+      })
+
+    this.gamesApiService.getJogosGenero("role-playing-games-rpg", 1).subscribe(
+      (result: any) => {
+        this.jogosRpg = result
+      })
+
+    this.gamesApiService.getJogosGenero("indie", 1).subscribe(
+      (result: any) => {
+        this.jogosIndie = result
+      })
   }
 
 
@@ -46,11 +41,6 @@ export class HomePage implements OnInit {
   // }
 
   goToDetails(id: number) {
-    this.router.navigate(['/detalhes', id], {
-      queryParams: {
-        param1: 'value1',
-        param2: 'value2'
-      }
-    });
+    this.router.navigate(['/detalhes', id])
   }
 }

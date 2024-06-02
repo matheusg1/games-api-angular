@@ -28,15 +28,13 @@ export class DetailsComponent implements OnInit {
       this.gamesApiService.getJogo(this.id).subscribe(
         (result: any) => {
           this.jogo = result
-          console.log('result')
-          console.log(result)
+
         })
 
         this.gamesApiService.getScreenshots(this.id).subscribe(
           (result: any) => {
             this.screenshots = result            
-            console.log('screenshots')
-            console.log(this.screenshots)
+
           })
     }
   }

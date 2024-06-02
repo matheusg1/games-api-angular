@@ -12,6 +12,35 @@
         </ion-card-header>        
       </ion-card>
     </div>
+
+
+    <h2>RPG</h2>
+    <div class="scrolling-wrapper-flexbox">
+      <ion-card class="card" *ngFor="let result of jogosRpg?.results" (click)="goToDetails(result?.id)">
+        <img class="card-img" alt=""
+          src={{result?.background_image}} />
+        <ion-card-header>
+          <ion-card-title>{{result?.name}}</ion-card-title>
+          <ion-card-subtitle>Lançamento {{result?.released}}</ion-card-subtitle>
+          <ion-card-subtitle>Nota {{result?.rating}}</ion-card-subtitle>
+        </ion-card-header>        
+      </ion-card>
+    </div>
+
+    <h2>Indie</h2>
+    <div class="scrolling-wrapper-flexbox">
+      <ion-card class="card" *ngFor="let result of jogosIndie?.results" (click)="goToDetails(result?.id)">
+        <img class="card-img" alt=""
+          src={{result?.background_image}} />
+        <ion-card-header>
+          <ion-card-title>{{result?.name}}</ion-card-title>
+          <ion-card-subtitle>Lançamento {{result?.released}}</ion-card-subtitle>
+          <ion-card-subtitle>Nota {{result?.rating}}</ion-card-subtitle>
+        </ion-card-header>        
+      </ion-card>
+    </div>
+
+
     </ion-content>
 
 

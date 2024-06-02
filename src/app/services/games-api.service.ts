@@ -33,20 +33,11 @@ export interface imagemResult {
 export class GamesApiService {
     constructor(private http: HttpClient) { }
 
-    getSearchMovies(): Observable<listaJogosResult> {
-        return this.http.get<listaJogosResult>(            
-            // `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`
-            //`https://api.rawg.io/api/games?key=6a167e0c74be43c6872cdbd3091db111&page_size=1&page=1`
-            `null`
-        );
-    }
-
     getJogos(pagina: number, ordenacao: string): Observable<listaJogosResult> {
         return this.http.get<listaJogosResult>(            
             //released
             //rating
-            // `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`
-            `https://api.rawg.io/api/games?key=6a167e0c74be43c6872cdbd3091db111&page_size=5&page=${pagina}&ordering=${ordenacao}`
+            `https://api.rawg.io/api/games?key=6a167e0c74be43c6872cdbd3091db111&page_size=10&page=${pagina}&ordering=${ordenacao}`
         );                      
     }
 
@@ -66,7 +57,14 @@ export class GamesApiService {
     getBemAvaliados(pagina: number): Observable<listaJogosResult> {
         return this.http.get<listaJogosResult>(            
             // `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`
-            `https://api.rawg.io/api/games?key=6a167e0c74be43c6872cdbd3091db111&page_size=5&page=${pagina}&ordering=released`
+            `https://api.rawg.io/api/games?key=6a167e0c74be43c6872cdbd3091db111&page_size=10&page=${pagina}&ordering=-rating,released`
+        );
+    }
+
+    getJogosGenero(genero: string, pagina: number): Observable<listaJogosResult> {
+        return this.http.get<listaJogosResult>(            
+            // `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=pt-BR&api_key=dadc0c005ef5db978255b26bb089a811&page=${page}`
+            `https://api.rawg.io/api/games?key=6a167e0c74be43c6872cdbd3091db111&page_size=10&page=${pagina}&genres=${genero}&ordering=-rating,released`            
         );
     }
 
