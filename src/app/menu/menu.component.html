@@ -1,14 +1,13 @@
 <ion-menu type="push" content-id="main-content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu Content</ion-title>
+      <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <ion-item routerLink="/">Início</ion-item>
-    <ion-item  (click)="navigate('/integrantes')">Integrantes</ion-item>
-    <ion-item  routerLink="/teste21334">TESTE</ion-item>
-    <ion-item>Página 2</ion-item>
+    <ion-item *ngIf="!isAuthenticated;" routerLink="/">Login</ion-item>
+    <ion-item *ngIf="isAuthenticated;" routerLink="/home">Início</ion-item>
+    <ion-item *ngIf="isAuthenticated;" (click)="navigate('/integrantes')">Integrantes</ion-item>
   </ion-content>
 </ion-menu>
 <div class="ion-page" id="main-content">

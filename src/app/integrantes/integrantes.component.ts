@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-integrantes',
@@ -7,8 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntegrantesComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private afAuth: AngularFireAuth, private router: Router) { }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.afAuth.authState.subscribe(user => {
+      if (!user) {
+        this.router.navigate(['/login']);        
+        console.log('NAO LOGADO')
+      } else {
+        console.log('LOGADO')
+      }
+    });
+  }
 }

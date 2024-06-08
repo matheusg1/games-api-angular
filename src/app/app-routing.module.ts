@@ -7,12 +7,18 @@ import { MenuModule } from './menu/menu.module';
 import { IntegrantesModule } from './integrantes/integrantes.module';
 import { DetailsModule } from './details/details.module';
 import { DetailsComponent } from './details/details.component';
+import { LoginComponent } from './login/login.component';
+import { LoginModule } from './login/login.module';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'home',
@@ -38,7 +44,8 @@ const routes: Routes = [
     MenuModule,
     HomeModule,    
     IntegrantesModule,    
-    DetailsModule
+    DetailsModule,
+    LoginModule
   ],  
   exports: [RouterModule],
 })
