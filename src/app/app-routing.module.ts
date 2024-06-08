@@ -9,6 +9,7 @@ import { DetailsModule } from './details/details.module';
 import { DetailsComponent } from './details/details.component';
 import { LoginComponent } from './login/login.component';
 import { LoginModule } from './login/login.module';
+import { AuthGuard } from './auth-guard.service';
 
 const routes: Routes = [
   {
@@ -22,19 +23,18 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomePage
+    component: HomePage,
+    canActivate: [AuthGuard]
   },
   {
     path: 'integrantes',
-    component: IntegrantesComponent
-  },
-  {
-    path: 'teste21334',
-    component: IntegrantesComponent
+    component: IntegrantesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'detalhes/:id',
-    component: DetailsComponent
+    component: DetailsComponent,
+    canActivate: [AuthGuard]
   }
 ]
 
@@ -42,11 +42,11 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
     MenuModule,
-    HomeModule,    
-    IntegrantesModule,    
+    HomeModule,
+    IntegrantesModule,
     DetailsModule,
     LoginModule
-  ],  
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }

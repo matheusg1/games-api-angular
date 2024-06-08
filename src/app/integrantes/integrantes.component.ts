@@ -11,14 +11,5 @@ export class IntegrantesComponent  implements OnInit {
 
   constructor(private afAuth: AngularFireAuth, private router: Router) { }
 
-  ngOnInit() {
-    this.afAuth.authState.subscribe(user => {
-      if (!user) {
-        this.router.navigate(['/login']);        
-        console.log('NAO LOGADO')
-      } else {
-        console.log('LOGADO')
-      }
-    });
-  }
+  ngOnInit() {}
 }

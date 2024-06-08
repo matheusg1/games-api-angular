@@ -22,10 +22,18 @@ export class MenuComponent  implements OnInit {
         this.isAuthenticated = false;
       }
     });
+
   }
   
   async navigate(link: string) {
     await this.menu.close();
     this.router.navigateByUrl(link);
+  }
+
+  async logout() {
+    await this.afAuth.signOut();
+    this.isAuthenticated = false;
+    this.router.navigate(['/login']);
+    console.log('DESCONECTADOS COM SUCESSO');
   }
 }

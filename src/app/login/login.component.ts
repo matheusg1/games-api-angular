@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 import { ToastController, LoadingController } from '@ionic/angular';
 
 @Component({
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private afAuth: AngularFireAuth,
     private toastController: ToastController,
-    private loadingController: LoadingController) { }
+    private loadingController: LoadingController, private router: Router) { }
 
   ngOnInit() { }
 
@@ -28,18 +29,20 @@ export class LoginComponent implements OnInit {
       const user = await this.afAuth.signInWithEmailAndPassword(this.email, this.password);
       await loading.dismiss();
       this.isAuthenticated = true;
-      this.showToast('ESTAMOS CONECTADOS');
+      this.router.navigate(['/home']);
+      this.showToast('Logado com sucesso');
+
     } catch (error) {
       await loading.dismiss();
-      this.showToast('NÃO ESTAMOS CONECTADOS');
+      this.showToast('Falha no login');
     }
   }
 
-  async logout() {
-    await this.afAuth.signOut();
-    this.isAuthenticated = false;
-    this.showToast('DESCONECTADOS COM SUCESSO');
-  }
+  // async logout() {
+  //   await this.afAuth.signOut();
+  //   this.isAuthenticated = false;
+  //   this.showToast('DESCONECTADOS COM SUCESSO');
+  // }
   
   async showToast(message: string) {
     const toast = await this.toastController.create({
