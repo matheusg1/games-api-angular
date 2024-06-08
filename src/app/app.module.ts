@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuModule } from './menu/menu.module';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from '../environments/environment';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +19,9 @@ import { MenuModule } from './menu/menu.module';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    MenuModule
+    MenuModule,
+    AngularFireModule.initializeApp(environment),
+    AngularFireAuthModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
