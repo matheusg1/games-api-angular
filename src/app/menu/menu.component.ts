@@ -9,7 +9,7 @@ import { MenuController } from '@ionic/angular';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
-export class MenuComponent  implements OnInit {
+export class MenuComponent implements OnInit {
   isAuthenticated: boolean = false;
 
   constructor(private router: Router, private menu: MenuController, private afAuth: AngularFireAuth) { }
@@ -24,7 +24,7 @@ export class MenuComponent  implements OnInit {
     });
 
   }
-  
+
   async navigate(link: string) {
     await this.menu.close();
     this.router.navigateByUrl(link);
@@ -33,7 +33,8 @@ export class MenuComponent  implements OnInit {
   async logout() {
     await this.afAuth.signOut();
     this.isAuthenticated = false;
-    this.router.navigate(['/login']);
-    console.log('DESCONECTADOS COM SUCESSO');
+    setTimeout(() => 
+      this.router.navigate(['/login'])
+      , 500)    
   }
 }
