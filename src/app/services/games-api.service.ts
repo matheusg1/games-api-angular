@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, forkJoin, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 export interface listaJogosResult {
     count: number;
@@ -38,7 +38,13 @@ export class GamesApiService {
             //released
             //rating
             `https://api.rawg.io/api/games?key=6a167e0c74be43c6872cdbd3091db111&page_size=10&page=${pagina}&ordering=${ordenacao}`
-        );                      
+        ).pipe(
+            catchError(error => {
+                console.error('Ocorreu um erro na requisição:', error);
+                return throwError(error);
+            })
+        );  
+        ;                      
     }
 
     getJogo(id?: number): Observable<jogoResult> {

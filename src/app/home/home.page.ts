@@ -21,6 +21,7 @@ export class HomePage implements OnInit, AfterViewInit {
   bemAvaliados: any;
   jogosRpg: any;
   jogosIndie: any;
+  mensagemDebug : string = "";
   constructor(public gamesApiService: GamesApiService, private router: Router) { }
 
   ngAfterViewInit() {
@@ -40,6 +41,7 @@ export class HomePage implements OnInit, AfterViewInit {
       //let momentoLoad = element.clientWidth * 2;
 
       if (fimScroll) {
+        this.mensagemDebug += "chegou ao fim do scroll"
         console.log(element.scrollWidth - element.scrollLeft)
         this.LoadMoreBemAvaliados(paginaBemAvaliados);
         sessionStorage.setItem('bem-avaliados-pagina', paginaBemAvaliados.toString());
@@ -112,6 +114,7 @@ export class HomePage implements OnInit, AfterViewInit {
           this.bemAvaliados.results.push(jogo);
         });
       })
+    this.mensagemDebug += "fez a chamada"
   }
 
   LoadMoreIndie(pagina: number) {
