@@ -10,6 +10,8 @@ import { DetailsComponent } from './details/details.component';
 import { LoginComponent } from './login/login.component';
 import { LoginModule } from './login/login.module';
 import { AuthGuard } from './auth-guard.service';
+import { CadastroModule } from './cadastro/cadastro.module';
+import { CadastroComponent } from './cadastro/cadastro.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+  {
+    path: 'cadastro',
+    component: CadastroComponent
+  },  
   {
     path: 'home',
     component: HomePage,
@@ -45,7 +51,8 @@ const routes: Routes = [
     HomeModule,
     IntegrantesModule,
     DetailsModule,
-    LoginModule
+    LoginModule,
+    CadastroModule
   ],
   exports: [RouterModule],
 })
