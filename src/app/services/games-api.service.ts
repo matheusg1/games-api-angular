@@ -43,8 +43,7 @@ export class GamesApiService {
                 console.error('Ocorreu um erro na requisição:', error);
                 return throwError(error);
             })
-        );  
-        ;                      
+        );                      
     }
 
     getJogo(id?: number): Observable<jogoResult> {
