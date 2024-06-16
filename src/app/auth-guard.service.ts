@@ -15,12 +15,10 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     return this.afAuth.authState.pipe(map(user => {
-      if (user) {
-        console.log('logado')
+      if (user) {       
         return true;
       } else {
         this.router.navigate(['/login']);
-        console.log('nao logado')
         return false;
       }
     }));

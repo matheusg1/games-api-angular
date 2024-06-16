@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { ToastController, LoadingController } from '@ionic/angular';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -15,10 +16,16 @@ export class LoginComponent implements OnInit {
 
   constructor(private afAuth: AngularFireAuth,
     private toastController: ToastController,
-    private loadingController: LoadingController, 
+    private loadingController: LoadingController,
     private router: Router) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.afAuth.authState.pipe(map(user => {
+      if (user) {
+        this.router.navigate(['/home']);
+      }
+    })).subscribe(); 
+  }
 
   async login() {
     const loading = await this.loadingController.create({
@@ -44,7 +51,7 @@ export class LoginComponent implements OnInit {
   //   this.isAuthenticated = false;
   //   this.showToast('DESCONECTADOS COM SUCESSO');
   // }
-  
+
   async showToast(message: string) {
     const toast = await this.toastController.create({
       message,

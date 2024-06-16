@@ -26,86 +26,50 @@ export class HomePage implements OnInit, AfterViewInit {
   rpgLoad: boolean = true;
   jogosIndie: any;
   indieLoad: boolean = true;
-  mensagemDebug : string = "";
+  mensagemDebug: string = "";
+  mostraCardLoading = true;
 
-  scrollWidth : number = 0;
-  scrollLeft : number = 0;
-  clientWidth : number = 0;
+  scrollWidth: number = 0;
+  scrollLeft: number = 0;
+  clientWidth: number = 0;
 
   constructor(public gamesApiService: GamesApiService, private router: Router) { }
 
   ngAfterViewInit() {
-    this.HandleScrollBemAvaliados();
-    this.HandleScrollJogosIndie();
-    this.HandleScrollJogosRpg();
+    this.HandleScroll(this.scrollableBemAvaliados, 'bem-avaliados-pagina');
+    this.HandleScroll(this.scrollableIndie, 'indie-pagina');
+    this.HandleScroll(this.scrollableRpg, 'rpg-pagina');
   }
 
-  HandleScrollBemAvaliados(){
-    console.log('setou bem avaliados 2')
-    sessionStorage.setItem('bem-avaliados-pagina', '2');
+  HandleScroll(scrollElement: ElementRef, storageItem: string) {
+    sessionStorage.setItem(storageItem, '2');
 
-    let paginaBemAvaliados = Number(sessionStorage.getItem('bem-avaliados-pagina'));
+    let paginaAtual = Number(sessionStorage.getItem(storageItem));
 
-    this.scrollableBemAvaliados.nativeElement.addEventListener('scroll', (event: CustomEvent) => {
-      let element = this.scrollableBemAvaliados.nativeElement;
+    scrollElement.nativeElement.addEventListener('scroll', (event: CustomEvent) => {
+      let element = scrollElement.nativeElement;
       let fimScroll = Math.abs(element.scrollWidth - element.scrollLeft - element.clientWidth) <= 1;
-      //let momentoLoad = element.clientWidth * 2;
-      this.scrollWidth = element.scrollWidth ;
+      this.scrollWidth = element.scrollWidth;
       this.scrollLeft = element.scrollLeft;
       this.clientWidth = element.clientWidth;
 
-      let childCount = this.scrollableBemAvaliados.nativeElement.children.length;
-      console.log('childCount' + childCount)
-
-      if (fimScroll) {
-        this.mensagemDebug += "chegou ao fim do scroll"
-        console.log(element.scrollWidth - element.scrollLeft)
-        this.LoadMoreBemAvaliados(paginaBemAvaliados);
-        sessionStorage.setItem('bem-avaliados-pagina', paginaBemAvaliados.toString());
-        paginaBemAvaliados++;        
-      }  
+      if (fimScroll) {        
+        if (storageItem == 'bem-avaliados-pagina') {
+          this.LoadMoreBemAvaliados(paginaAtual)
+        }
+        else if (storageItem == 'indie-pagina') {
+          this.LoadMoreIndie(paginaAtual);
+        }
+        else if (storageItem == 'rpg-pagina') {
+          this.LoadMoreRpg(paginaAtual);
+        }
+        sessionStorage.setItem(storageItem, paginaAtual.toString());
+        paginaAtual++;
+      }
     });
   }
 
-  HandleScrollJogosIndie(){
-    sessionStorage.setItem('indie-pagina', '2');
-
-    let paginaIndie = Number(sessionStorage.getItem('indie-pagina'));
-
-    this.scrollableIndie.nativeElement.addEventListener('scroll', (event: CustomEvent) => {
-      let element = this.scrollableIndie.nativeElement;
-      let fimScroll = element.scrollWidth - element.scrollLeft === element.clientWidth;
-      //let momentoLoad = element.clientWidth * 2;
-
-      if (fimScroll) {
-        console.log(element.scrollWidth - element.scrollLeft)
-        this.LoadMoreIndie(paginaIndie);
-        sessionStorage.setItem('indie-pagina', paginaIndie.toString());
-        paginaIndie++;        
-      }  
-    });
-  }
-
-  HandleScrollJogosRpg(){
-    sessionStorage.setItem('rpg-pagina', '2');
-
-    let paginaRpg = Number(sessionStorage.getItem('rpg-pagina'));
-
-    this.scrollableRpg.nativeElement.addEventListener('scroll', (event: CustomEvent) => {
-      let element = this.scrollableRpg.nativeElement;
-      let fimScroll = element.scrollWidth - element.scrollLeft === element.clientWidth;
-      //let momentoLoad = element.clientWidth * 2;
-      console.log('rolando scroll rpg')
-      if (fimScroll) {
-        console.log(element.scrollWidth - element.scrollLeft)
-        this.LoadMoreRpg(paginaRpg);
-        sessionStorage.setItem('rpg-pagina', paginaRpg.toString());
-        paginaRpg++;        
-      }  
-    });
-  }
-
-  ngOnInit() {    
+  ngOnInit() {
     this.gamesApiService.getJogos(1, "-rating, released").pipe(
       catchError(error => {
         //return of([]);
@@ -113,36 +77,36 @@ export class HomePage implements OnInit, AfterViewInit {
       })
     ).subscribe(
       (result: any) => {
-        this.bemAvaliadosLoad = false;        
+        this.bemAvaliadosLoad = false;
         this.bemAvaliados = result;
       }
     )
 
-    // this.gamesApiService.getJogosGenero("role-playing-games-rpg", 1).pipe(
-    //   catchError(error => {
-    //     //return of([]);
-    //     console.log('abcd ')
-    //     return throwError(error)
-    //   })
-    // ).subscribe(
-    //   (result: any) => {
-    //     this.rpgLoad = false;        
-    //     this.jogosRpg = result;
-    //   }
-    // )
+    this.gamesApiService.getJogosGenero("role-playing-games-rpg", 1).pipe(
+      catchError(error => {
+        //return of([]);
+        console.log('abcd ')
+        return throwError(error)
+      })
+    ).subscribe(
+      (result: any) => {
+        this.rpgLoad = false;
+        this.jogosRpg = result;
+      }
+    )
 
-    // this.gamesApiService.getJogosGenero("indie", 1).pipe(
-    //   catchError(error => {
-    //     //return of([]);        
-    //     return throwError(error)
-    //   })
-    // ).subscribe(
-    //   (result: any) => {
-    //     console.log('deu indie false')
-    //     this.indieLoad = false;        
-    //     this.jogosIndie = result;
-    //   }
-    // )
+    this.gamesApiService.getJogosGenero("indie", 1).pipe(
+      catchError(error => {
+        //return of([]);        
+        return throwError(error)
+      })
+    ).subscribe(
+      (result: any) => {
+        console.log('deu indie false')
+        this.indieLoad = false;
+        this.jogosIndie = result;
+      }
+    )
   }
 
   LoadMoreBemAvaliados(pagina: number) {
@@ -153,7 +117,6 @@ export class HomePage implements OnInit, AfterViewInit {
           this.bemAvaliados.results.push(jogo);
         });
       })
-    this.mensagemDebug += "fez a chamada"
   }
 
   LoadMoreIndie(pagina: number) {
@@ -178,5 +141,40 @@ export class HomePage implements OnInit, AfterViewInit {
 
   goToDetails(id: number) {
     this.router.navigate(['/detalhes', id])
+  }
+
+  criaCardLoading() {
+    let ionCard = document.createElement('ion-card');
+    ionCard.setAttribute('class', 'card');
+
+    // Cria os elementos ion-skeleton-text e adiciona ao ion-card
+    for (let i = 0; i < 5; i++) {
+      let skeletonText = document.createElement('ion-skeleton-text');
+      skeletonText.setAttribute('animated', 'true');
+      skeletonText.setAttribute('class', 'skeleton-img');
+      ionCard.appendChild(skeletonText);
+    }
+
+    // Cria o elemento ion-card-header e adiciona ao ion-card
+    let cardHeader = document.createElement('ion-card-header');
+    ionCard.appendChild(cardHeader);
+
+    // Cria os elementos ion-skeleton-text e adiciona ao ion-card-header
+    let skeletonTexto = document.createElement('ion-skeleton-text');
+    skeletonTexto.setAttribute('animated', 'true');
+    skeletonTexto.setAttribute('class', 'skeleton-texto');
+    cardHeader.appendChild(skeletonTexto);
+
+    let skeletonSubtexto1 = document.createElement('ion-skeleton-text');
+    skeletonSubtexto1.setAttribute('animated', 'true');
+    skeletonSubtexto1.setAttribute('class', 'skeleton-subtexto1');
+    cardHeader.appendChild(skeletonSubtexto1);
+
+    let skeletonSubtexto2 = document.createElement('ion-skeleton-text');
+    skeletonSubtexto2.setAttribute('animated', 'true');
+    skeletonSubtexto2.setAttribute('class', 'skeleton-subtexto2');
+    cardHeader.appendChild(skeletonSubtexto2);
+    return ionCard;
+
   }
 }
