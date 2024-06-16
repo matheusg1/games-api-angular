@@ -19,22 +19,34 @@
     -webkit-overflow-scrolling: touch !important;
 }
 
-.skeleton-img{
-    height: 250px; 
+.skeleton-img {
+    height: 250px;
     width: 250px;
 }
 
-.skeleton-texto{
+.skeleton-texto {
     height: 25px
 }
 
 
-.skeleton-subtexto1{
-    height: 15px; width: 75%;
+.skeleton-subtexto1 {
+    height: 15px;
+    width: 75%;
 }
 
-.skeleton-subtexto2{
-    height: 15px; width: 100px;
+.skeleton-subtexto2 {
+    height: 15px;
+    width: 100px;
+}
+
+.card-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.div-star{
+    align-self: center;
 }
 /*
  * App Global CSS
@@ -73,4 +85,3 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
-

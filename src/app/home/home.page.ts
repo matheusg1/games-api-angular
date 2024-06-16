@@ -5,6 +5,7 @@ import { MenuController } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
 import { catchError, of, throwError } from 'rxjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FavoritosService } from '../services/favoritos-service.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   // styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit, AfterViewInit {
-  
+
   @ViewChild('scrollableBemAvaliados') scrollableBemAvaliados!: ElementRef;
   @ViewChild('scrollableIndie') scrollableIndie!: ElementRef;
   @ViewChild('scrollableRpg') scrollableRpg!: ElementRef;
@@ -34,15 +35,15 @@ export class HomePage implements OnInit, AfterViewInit {
   scrollLeft: number = 0;
   clientWidth: number = 0;
 
-  constructor(public gamesApiService: GamesApiService, private router: Router) { }
+  constructor(public gamesApiService: GamesApiService, public favoritosService: FavoritosService, private router: Router) { }
 
   ngAfterViewInit() {
-    this.HandleScroll(this.scrollableBemAvaliados, 'bem-avaliados-pagina');
-    this.HandleScroll(this.scrollableIndie, 'indie-pagina');
-    this.HandleScroll(this.scrollableRpg, 'rpg-pagina');
+    this.handleScroll(this.scrollableBemAvaliados, 'bem-avaliados-pagina');
+    this.handleScroll(this.scrollableIndie, 'indie-pagina');
+    this.handleScroll(this.scrollableRpg, 'rpg-pagina');
   }
 
-  HandleScroll(scrollElement: ElementRef, storageItem: string) {
+  handleScroll(scrollElement: ElementRef, storageItem: string) {
     sessionStorage.setItem(storageItem, '2');
 
     let paginaAtual: number = Number(sessionStorage.getItem(storageItem));
@@ -54,7 +55,7 @@ export class HomePage implements OnInit, AfterViewInit {
       this.scrollLeft = element.scrollLeft;
       this.clientWidth = element.clientWidth;
 
-      if (fimScroll) {        
+      if (fimScroll) {
         if (storageItem == 'bem-avaliados-pagina') {
           this.LoadMoreBemAvaliados(paginaAtual)
         }
@@ -70,6 +71,15 @@ export class HomePage implements OnInit, AfterViewInit {
     });
   }
 
+  handleClickFavorito(id: number) {        
+    if(this.favoritosService.isFavorito(id)){
+        this.favoritosService.removeFavorito(id);
+    }
+    else{
+      this.favoritosService.addFavorito(id);
+    };
+  }
+
   ngOnInit() {
     this.gamesApiService.getJogos(1, "-rating, released").pipe(
       catchError(error => {
@@ -82,6 +92,8 @@ export class HomePage implements OnInit, AfterViewInit {
         this.bemAvaliados = result;
       }
     )
+
+    
 
     // this.gamesApiService.getJogosGenero("role-playing-games-rpg", 1).pipe(
     //   catchError(error => {

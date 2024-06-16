@@ -15,7 +15,8 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     return this.afAuth.authState.pipe(map(user => {
-      if (user) {       
+      if (user) {      
+        localStorage.setItem('user-uid', user.uid); 
         return true;
       } else {
         this.router.navigate(['/login']);
