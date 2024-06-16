@@ -8,7 +8,7 @@
     <ion-card class="card" *ngFor="let number of [0, 1, 2, 3, 4]">
       <ion-skeleton-text [animated]="true" class="skeleton-img"></ion-skeleton-text>
       <ion-card-header>
-        <ion-skeleton-text [animated]="true" class="skeleton-texto" ></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" class="skeleton-texto"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" class="skeleton-subtexto1"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" class="skeleton-subtexto2"></ion-skeleton-text>
       </ion-card-header>
@@ -19,7 +19,15 @@
     <ion-card class="card" *ngFor="let result of bemAvaliados?.results" (click)="goToDetails(result?.id)">
       <img class="card-img" alt="" src={{result?.background_image}} />
       <ion-card-header>
-        <ion-card-title>{{result?.name}}</ion-card-title>
+        <ion-card-title style="display: flex; flex-direction: row; justify-content: space-between;">
+          <div>
+            {{result?.name}}
+          </div>
+          <div style="align-self: flex-end;">
+            <!-- <fa-icon [icon]="['fas', 'star']"></fa-icon> -->
+            <fa-icon [icon]="['far', 'star']" style="color:red"></fa-icon>
+          </div>
+        </ion-card-title>
         <ion-card-subtitle>Lançamento {{result?.released}}</ion-card-subtitle>
         <ion-card-subtitle>Nota {{result?.rating}}</ion-card-subtitle>
       </ion-card-header>
@@ -28,7 +36,7 @@
     <ion-card class="card" *ngIf="bemAvaliados?.results.length > 1 && mostraCardLoading" id="load-card">
       <ion-skeleton-text [animated]="true" class="skeleton-img"></ion-skeleton-text>
       <ion-card-header>
-        <ion-skeleton-text [animated]="true" class="skeleton-texto" ></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" class="skeleton-texto"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" class="skeleton-subtexto1"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" class="skeleton-subtexto2"></ion-skeleton-text>
       </ion-card-header>
@@ -41,7 +49,7 @@
     <ion-card class="card" *ngFor="let number of [0, 1, 2, 3, 4]">
       <ion-skeleton-text [animated]="true" class="skeleton-img"></ion-skeleton-text>
       <ion-card-header>
-        <ion-skeleton-text [animated]="true" class="skeleton-texto" ></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" class="skeleton-texto"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" class="skeleton-subtexto1"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" class="skeleton-subtexto2"></ion-skeleton-text>
       </ion-card-header>
@@ -61,7 +69,7 @@
     <ion-card class="card" *ngIf="jogosIndie?.results.length > 1" id="load-card">
       <ion-skeleton-text [animated]="true" class="skeleton-img"></ion-skeleton-text>
       <ion-card-header>
-        <ion-skeleton-text [animated]="true" class="skeleton-texto" ></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" class="skeleton-texto"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" class="skeleton-subtexto1"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" class="skeleton-subtexto2"></ion-skeleton-text>
       </ion-card-header>
@@ -74,13 +82,13 @@
     <ion-card class="card" *ngFor="let number of [0, 1, 2, 3, 4]">
       <ion-skeleton-text [animated]="true" class="skeleton-img"></ion-skeleton-text>
       <ion-card-header>
-        <ion-skeleton-text [animated]="true" class="skeleton-texto" ></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" class="skeleton-texto"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" class="skeleton-subtexto1"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" class="skeleton-subtexto2"></ion-skeleton-text>
       </ion-card-header>
     </ion-card>
 
-    
+
   </div>
 
   <div #scrollableRpg class="scrolling-wrapper-flexbox">
@@ -96,7 +104,7 @@
     <ion-card class="card" *ngIf="jogosRpg?.results.length > 1" id="load-card">
       <ion-skeleton-text [animated]="true" class="skeleton-img"></ion-skeleton-text>
       <ion-card-header>
-        <ion-skeleton-text [animated]="true" class="skeleton-texto" ></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" class="skeleton-texto"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" class="skeleton-subtexto1"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" class="skeleton-subtexto2"></ion-skeleton-text>
       </ion-card-header>

@@ -9,6 +9,7 @@ import { MenuModule } from './menu/menu.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     MenuModule,
     AngularFireModule.initializeApp(environment),
-    AngularFireAuthModule
+    AngularFireAuthModule,    
+    FontAwesomeModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

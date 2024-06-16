@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
 import { catchError, of, throwError } from 'rxjs';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { catchError, of, throwError } from 'rxjs';
   // styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit, AfterViewInit {
-
+  
   @ViewChild('scrollableBemAvaliados') scrollableBemAvaliados!: ElementRef;
   @ViewChild('scrollableIndie') scrollableIndie!: ElementRef;
   @ViewChild('scrollableRpg') scrollableRpg!: ElementRef;
@@ -44,7 +45,7 @@ export class HomePage implements OnInit, AfterViewInit {
   HandleScroll(scrollElement: ElementRef, storageItem: string) {
     sessionStorage.setItem(storageItem, '2');
 
-    let paginaAtual = Number(sessionStorage.getItem(storageItem));
+    let paginaAtual: number = Number(sessionStorage.getItem(storageItem));
 
     scrollElement.nativeElement.addEventListener('scroll', (event: CustomEvent) => {
       let element = scrollElement.nativeElement;
@@ -82,31 +83,31 @@ export class HomePage implements OnInit, AfterViewInit {
       }
     )
 
-    this.gamesApiService.getJogosGenero("role-playing-games-rpg", 1).pipe(
-      catchError(error => {
-        //return of([]);
-        console.log('abcd ')
-        return throwError(error)
-      })
-    ).subscribe(
-      (result: any) => {
-        this.rpgLoad = false;
-        this.jogosRpg = result;
-      }
-    )
+    // this.gamesApiService.getJogosGenero("role-playing-games-rpg", 1).pipe(
+    //   catchError(error => {
+    //     //return of([]);
+    //     console.log('abcd ')
+    //     return throwError(error)
+    //   })
+    // ).subscribe(
+    //   (result: any) => {
+    //     this.rpgLoad = false;
+    //     this.jogosRpg = result;
+    //   }
+    // )
 
-    this.gamesApiService.getJogosGenero("indie", 1).pipe(
-      catchError(error => {
-        //return of([]);        
-        return throwError(error)
-      })
-    ).subscribe(
-      (result: any) => {
-        console.log('deu indie false')
-        this.indieLoad = false;
-        this.jogosIndie = result;
-      }
-    )
+    // this.gamesApiService.getJogosGenero("indie", 1).pipe(
+    //   catchError(error => {
+    //     //return of([]);        
+    //     return throwError(error)
+    //   })
+    // ).subscribe(
+    //   (result: any) => {
+    //     console.log('deu indie false')
+    //     this.indieLoad = false;
+    //     this.jogosIndie = result;
+    //   }
+    // )
   }
 
   LoadMoreBemAvaliados(pagina: number) {
