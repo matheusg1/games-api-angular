@@ -27,6 +27,11 @@ export class HomePage implements OnInit, AfterViewInit {
   jogosIndie: any;
   indieLoad: boolean = true;
   mensagemDebug : string = "";
+
+  scrollWidth : number = 0;
+  scrollLeft : number = 0;
+  clientWidth : number = 0;
+
   constructor(public gamesApiService: GamesApiService, private router: Router) { }
 
   ngAfterViewInit() {
@@ -36,14 +41,21 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   HandleScrollBemAvaliados(){
+    console.log('setou bem avaliados 2')
     sessionStorage.setItem('bem-avaliados-pagina', '2');
 
     let paginaBemAvaliados = Number(sessionStorage.getItem('bem-avaliados-pagina'));
 
     this.scrollableBemAvaliados.nativeElement.addEventListener('scroll', (event: CustomEvent) => {
       let element = this.scrollableBemAvaliados.nativeElement;
-      let fimScroll = element.scrollWidth - element.scrollLeft === element.clientWidth;
+      let fimScroll = Math.abs(element.scrollWidth - element.scrollLeft - element.clientWidth) <= 1;
       //let momentoLoad = element.clientWidth * 2;
+      this.scrollWidth = element.scrollWidth ;
+      this.scrollLeft = element.scrollLeft;
+      this.clientWidth = element.clientWidth;
+
+      let childCount = this.scrollableBemAvaliados.nativeElement.children.length;
+      console.log('childCount' + childCount)
 
       if (fimScroll) {
         this.mensagemDebug += "chegou ao fim do scroll"
@@ -106,31 +118,31 @@ export class HomePage implements OnInit, AfterViewInit {
       }
     )
 
-    this.gamesApiService.getJogosGenero("role-playing-games-rpg", 1).pipe(
-      catchError(error => {
-        //return of([]);
-        console.log('abcd ')
-        return throwError(error)
-      })
-    ).subscribe(
-      (result: any) => {
-        this.rpgLoad = false;        
-        this.jogosRpg = result;
-      }
-    )
+    // this.gamesApiService.getJogosGenero("role-playing-games-rpg", 1).pipe(
+    //   catchError(error => {
+    //     //return of([]);
+    //     console.log('abcd ')
+    //     return throwError(error)
+    //   })
+    // ).subscribe(
+    //   (result: any) => {
+    //     this.rpgLoad = false;        
+    //     this.jogosRpg = result;
+    //   }
+    // )
 
-    this.gamesApiService.getJogosGenero("indie", 1).pipe(
-      catchError(error => {
-        //return of([]);        
-        return throwError(error)
-      })
-    ).subscribe(
-      (result: any) => {
-        console.log('deu indie false')
-        this.indieLoad = false;        
-        this.jogosIndie = result;
-      }
-    )
+    // this.gamesApiService.getJogosGenero("indie", 1).pipe(
+    //   catchError(error => {
+    //     //return of([]);        
+    //     return throwError(error)
+    //   })
+    // ).subscribe(
+    //   (result: any) => {
+    //     console.log('deu indie false')
+    //     this.indieLoad = false;        
+    //     this.jogosIndie = result;
+    //   }
+    // )
   }
 
   LoadMoreBemAvaliados(pagina: number) {
