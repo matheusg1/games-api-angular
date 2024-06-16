@@ -8,6 +8,7 @@
     <ion-item *ngIf="!isAuthenticated;" routerLink="/">Login</ion-item>
     <ion-item *ngIf="!isAuthenticated;" routerLink="/cadastro">Cadastro</ion-item>
     <ion-item *ngIf="isAuthenticated;" routerLink="/home">Início</ion-item>
+    <!-- <ion-item *ngIf="isAuthenticated;" (click)="navigate('/favoritos')">Favoritos</ion-item> -->
     <ion-item *ngIf="isAuthenticated;" (click)="navigate('/integrantes')">Integrantes</ion-item>
     <ion-item *ngIf="isAuthenticated;" (click)="logout()">Sair</ion-item>
   </ion-content>

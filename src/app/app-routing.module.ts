@@ -12,6 +12,8 @@ import { LoginModule } from './login/login.module';
 import { AuthGuard } from './auth-guard.service';
 import { CadastroModule } from './cadastro/cadastro.module';
 import { CadastroComponent } from './cadastro/cadastro.component';
+import { FavoritosComponent } from './favoritos/favoritos.component';
+import { FavoritosModule } from './favoritos/favoritos.module';
 
 const routes: Routes = [
   {
@@ -41,6 +43,11 @@ const routes: Routes = [
     path: 'detalhes/:id',
     component: DetailsComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'favoritos',
+    component: FavoritosComponent,
+    canActivate: [AuthGuard]
   }
 ]
 
@@ -52,7 +59,8 @@ const routes: Routes = [
     IntegrantesModule,
     DetailsModule,
     LoginModule,
-    CadastroModule
+    CadastroModule,
+    FavoritosModule
   ],
   exports: [RouterModule],
 })

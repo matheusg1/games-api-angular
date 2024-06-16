@@ -95,31 +95,30 @@ export class HomePage implements OnInit, AfterViewInit {
 
     
 
-    // this.gamesApiService.getJogosGenero("role-playing-games-rpg", 1).pipe(
-    //   catchError(error => {
-    //     //return of([]);
-    //     console.log('abcd ')
-    //     return throwError(error)
-    //   })
-    // ).subscribe(
-    //   (result: any) => {
-    //     this.rpgLoad = false;
-    //     this.jogosRpg = result;
-    //   }
-    // )
+    this.gamesApiService.getJogosGenero("role-playing-games-rpg", 1).pipe(
+      catchError(error => {
+        //return of([]);
+        return throwError(error)
+      })
+    ).subscribe(
+      (result: any) => {
+        this.rpgLoad = false;
+        this.jogosRpg = result;
+      }
+    )
 
-    // this.gamesApiService.getJogosGenero("indie", 1).pipe(
-    //   catchError(error => {
-    //     //return of([]);        
-    //     return throwError(error)
-    //   })
-    // ).subscribe(
-    //   (result: any) => {
-    //     console.log('deu indie false')
-    //     this.indieLoad = false;
-    //     this.jogosIndie = result;
-    //   }
-    // )
+    this.gamesApiService.getJogosGenero("indie", 1).pipe(
+      catchError(error => {
+        //return of([]);        
+        return throwError(error)
+      })
+    ).subscribe(
+      (result: any) => {
+        console.log('deu indie false')
+        this.indieLoad = false;
+        this.jogosIndie = result;
+      }
+    )
   }
 
   LoadMoreBemAvaliados(pagina: number) {
