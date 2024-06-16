@@ -3,6 +3,7 @@ import { GamesApiService } from '../services/games-api.service';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
+import { catchError, of, throwError } from 'rxjs';
 
 
 @Component({
@@ -18,9 +19,13 @@ export class HomePage implements OnInit, AfterViewInit {
 
   carouselInnerHtml: any;
   lancamentos: any;
+  lancamentosLoad: boolean = true;
   bemAvaliados: any;
+  bemAvaliadosLoad: boolean = true;
   jogosRpg: any;
+  rpgLoad: boolean = true;
   jogosIndie: any;
+  indieLoad: boolean = true;
   mensagemDebug : string = "";
   constructor(public gamesApiService: GamesApiService, private router: Router) { }
 
@@ -88,22 +93,44 @@ export class HomePage implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnInit() {
-    this.gamesApiService.getJogos(1, "-rating, released").subscribe(
-      (result: any) => {
-        this.bemAvaliados = result
-
+  ngOnInit() {    
+    this.gamesApiService.getJogos(1, "-rating, released").pipe(
+      catchError(error => {
+        //return of([]);
+        return throwError(error)
       })
-
-    this.gamesApiService.getJogosGenero("role-playing-games-rpg", 1).subscribe(
+    ).subscribe(
       (result: any) => {
-        this.jogosRpg = result
-      })
+        this.bemAvaliadosLoad = false;        
+        this.bemAvaliados = result;
+      }
+    )
 
-    this.gamesApiService.getJogosGenero("indie", 1).subscribe(
-      (result: any) => {
-        this.jogosIndie = result
+    this.gamesApiService.getJogosGenero("role-playing-games-rpg", 1).pipe(
+      catchError(error => {
+        //return of([]);
+        console.log('abcd ')
+        return throwError(error)
       })
+    ).subscribe(
+      (result: any) => {
+        this.rpgLoad = false;        
+        this.jogosRpg = result;
+      }
+    )
+
+    this.gamesApiService.getJogosGenero("indie", 1).pipe(
+      catchError(error => {
+        //return of([]);        
+        return throwError(error)
+      })
+    ).subscribe(
+      (result: any) => {
+        console.log('deu indie false')
+        this.indieLoad = false;        
+        this.jogosIndie = result;
+      }
+    )
   }
 
   LoadMoreBemAvaliados(pagina: number) {

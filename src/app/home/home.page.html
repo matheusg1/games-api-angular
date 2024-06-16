@@ -1,7 +1,7 @@
 <ion-content class="ion-padding">
   <h2>Melhor avaliação</h2>
 
-  <div class="scrolling-wrapper-flexbox">
+  <div class="scrolling-wrapper-flexbox" *ngIf="bemAvaliadosLoad">
     <ion-card class="card" *ngFor="let number of [0, 1, 2, 3, 4]">
       <ion-skeleton-text [animated]="true" style="height: 250px; width: 250px;"></ion-skeleton-text>
       <img class="card-img" alt=""  />
@@ -26,7 +26,7 @@
 
   <h2>Indie</h2>
 
-  <div class="scrolling-wrapper-flexbox">
+  <div class="scrolling-wrapper-flexbox" *ngIf="indieLoad">
     <ion-card class="card" *ngFor="let number of [0, 1, 2, 3, 4]">
       <ion-skeleton-text [animated]="true" style="height: 250px; width: 250px;"></ion-skeleton-text>
       <img class="card-img" alt=""  />
@@ -51,7 +51,7 @@
 
   <h2>RPG</h2>
 
-  <div class="scrolling-wrapper-flexbox">
+  <div class="scrolling-wrapper-flexbox" *ngIf="rpgLoad">
     <ion-card class="card" *ngFor="let number of [0, 1, 2, 3, 4]">
       <ion-skeleton-text [animated]="true" style="height: 250px; width: 250px;"></ion-skeleton-text>
       <img class="card-img" alt=""  />
